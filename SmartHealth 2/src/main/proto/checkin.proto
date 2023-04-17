@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+
+service VisitorsCheckInService {
+  rpc CreateNewVisitor(CreateNewVisitorRequest) returns (CreateNewVisitorResponse) {}
+  rpc VisitorStatus(stream VisitorStatusRequest) returns (VisitorStatusResponse) {}
+  rpc InpatientVisitors(stream InpatientVisitorRequest) returns (InpatientVisitorResponse) {}
+}
+
+message CreateNewVisitorRequest {
+  string username = 1;
+  string password = 2;
+  // other relevant fields
+}
+
+message CreateNewVisitorResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message VisitorStatusRequest {
+  string visitor_id = 1;
+}
+
+message VisitorStatusResponse {
+  bool allowed = 1;
+}
+
+message InpatientVisitorRequest {
+  string inpatient_id = 1;
+  string visitor_id = 2;
+}
+
+message InpatientVisitorResponse {
+  bool onboarded = 1;
+}
