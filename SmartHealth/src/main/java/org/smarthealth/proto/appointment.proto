@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package appointment;
+
+service AppointmentService {
+  rpc CreateAppointment(stream Appointment) returns (CreateAppointmentResponse) {}
+  rpc ModifyAppointment(stream Appointment) returns (ModifyAppointmentResponse) {}
+  rpc CancelAppointment(CancelAppointmentRequest) returns (CancelAppointmentResponse) {}
+}
+
+message Appointment {
+  string patient_id = 1;
+  string doctor_id = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+}
+
+message CreateAppointmentResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ModifyAppointmentResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CancelAppointmentRequest {
+  string appointment_id = 1;
+}
+
+message CancelAppointmentResponse {
+  bool success = 1;
+  string message = 2;
+}
