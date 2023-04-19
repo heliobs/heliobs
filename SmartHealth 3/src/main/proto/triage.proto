@@ -1,0 +1,36 @@
+  syntax = "proto3";
+
+
+  service TriageService {
+    rpc CheckInTriageProcedure(CheckInTriageProcedureRequest) returns (CheckInTriageProcedureResponse) {}
+    rpc SetStatusDiseasePatient(stream SetStatusDiseasePatientRequest) returns (SetStatusDiseasePatientResponse) {}
+    rpc AdjustProcedureSteps(stream ProcedureStep) returns (AdjustProcedureStepsResponse) {}
+  }
+
+  message CheckInTriageProcedureRequest {
+    string patient_id = 1;
+  }
+
+  message CheckInTriageProcedureResponse {
+    string message = 1;
+  }
+
+  message SetStatusDiseasePatientRequest {
+    string patient_id = 1;
+    double temperature = 2;
+    double blood_pressure = 3;
+    string symptoms = 4;
+  }
+
+  message SetStatusDiseasePatientResponse {
+    string message = 1;
+  }
+
+  message ProcedureStep {
+    string patient_id = 1;
+    int32 step = 2;
+  }
+
+  message AdjustProcedureStepsResponse {
+    string message = 1;
+  }
